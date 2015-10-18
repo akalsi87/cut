@@ -13,7 +13,8 @@ set(cut_common_lib_compat_ver
 # -- Headers
 # export
 set(cut_common_exp_hdr
-    include/cut/common/version.h)
+    include/cut/common/version.h;
+    include/cut/common/allocator.h)
 
 # internal
 set(cut_common_int_hdr
@@ -21,7 +22,8 @@ set(cut_common_int_hdr
 
 # -- Sources
 set(cut_common_src
-    src/cut/common/version.c)
+    src/cut/common/version.c;
+    src/cut/common/allocator.c)
 
 # -- Targets
 # --- shared
