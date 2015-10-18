@@ -89,7 +89,7 @@ const cutAllocator* cutDefaultAllocator()
 
 void cutSetDefaultAllocator(const cutAllocator* alloc)
 {
-    if (CUT_LIKELY(alloc)) {
+    if (CUT_LIKELY(alloc != NULL)) {
         SET_ALLOC = *alloc;
     }
 }
