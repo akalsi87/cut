@@ -14,6 +14,8 @@ set(cut_common_lib_compat_ver
 # export
 set(cut_common_exp_hdr
     include/cut/common/version.h;
+    include/cut/common/inline.h;
+    include/cut/common/likely.h;
     include/cut/common/allocator.h)
 
 # internal

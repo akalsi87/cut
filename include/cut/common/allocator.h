@@ -37,21 +37,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MOD includes */
 #include <cut/common/exportsym.h>
+#include <cut/common/inline.h>
 
 /*! alloc function   */
-typedef void* (*cutAllocFcn)(size_t);
+typedef void* (*cutAllocFcn)(void*, size_t);
 
 /*! dealloc function */
-typedef void  (*cutDeallocFcn)(void*);
+typedef void  (*cutDeallocFcn)(void*, void*);
 
 /*! realloc function */
-typedef void* (*cutReallocFcn)(void*, size_t);
+typedef void* (*cutReallocFcn)(void*, void*, size_t);
 
 /*! zalloc function  */
-typedef void* (*cutZallocFcn)(size_t);
+typedef void* (*cutZallocFcn)(void*, size_t);
 
 /*!
- *
+ * Definition for an allocator.
  */
 typedef struct cutAllocTag
 {
@@ -64,14 +65,73 @@ typedef struct cutAllocTag
 
 CUT_COMMON_API
 /*!
- *
+ * Get the deafult allocator. This is the allocator used by this library.
  */
-cutAllocator cutDefaultAllocator();
+const cutAllocator* cutDefaultAllocator();
 
 CUT_COMMON_API
 /*!
+ * Set the default allocator used by this library. This must be called before
+ * any other APIs as the library state may have allocated data from a different
+ * allocator.
  *
+ * Allocators are copied, therefore are expected to have trivial assignment
+ * work as the copy mechanism. If there is some other way to clone your allocator
+ * clone outside this function, and then call this with the clone.
+ *
+ * The way to copy is similar to:
+ * \code{.c}
+ *   cutAllocator myAlloc = *alloc;
+ * \endcode
  */
-void cutSetDefaultAllocator(cutAllocator alloc);
+void cutSetDefaultAllocator(const cutAllocator* alloc);
+
+CUT_INLINE
+/*!
+ * Allocate uninitialized memory.
+ * \param palloc - Pointer to a valid allocator. Cannot be NULL.
+ * \param s - Size in bytes to allocate.
+ * \return Pointer to memory if successful or NULL if failure occurs.
+ */
+void* cutAllocate(const cutAllocator* palloc, size_t s)
+{
+    return palloc->alloc(palloc->_state, s);
+}
+
+CUT_INLINE
+/*!
+ * Allocate zero initialized memory.
+ * \param palloc - Pointer to a valid allocator. Cannot be NULL.
+ * \param s - Size in bytes to allocate.
+ * \return Pointer to memory if successful or NULL if failure occurs.
+ */
+void* cutZallocate(const cutAllocator* palloc, size_t s)
+{
+    return palloc->zalloc(palloc->_state, s);
+}
+
+CUT_INLINE
+/*!
+ * Reallocate already allocated memory.
+ * \param palloc - Pointer to a valid allocator. Cannot be NULL.
+ * \param p - Pointer to attempt to reallocate.
+ * \param s - Size in bytes to allocate.
+ * \return Pointer to memory if successful or NULL if failure occurs.
+ */
+void* cutReallocate(const cutAllocator* palloc, void* p, size_t s)
+{
+    return palloc->realloc(palloc->_state, p, s);
+}
+
+CUT_INLINE
+/*!
+ * Reclaim allocated memory.
+ * \param palloc - Pointer to a valid allocator. Cannot be NULL.
+ * \param p - Pointer to destroy.
+ */
+void cutDeallocate(const cutAllocator* palloc, void* p)
+{
+    palloc->dealloc(palloc->_state, p);
+}
 
 #endif/*CUT_COMMON_ALLOCATOR_H*/

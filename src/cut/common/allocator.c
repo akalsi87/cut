@@ -34,15 +34,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MOD includes */
 #include <cut/common/allocator.h>
+#include <cut/common/likely.h>
 
 #define PRIVATE static
 
-PRIVATE void* cutAlloc(size_t s)
+PRIVATE void* cutAlloc(void* state, size_t s)
 {
     return malloc(s);
 }
 
-PRIVATE void* cutZalloc(size_t s)
+PRIVATE void* cutZalloc(void* state, size_t s)
 {
     switch (s % 8) {
         case 0:  return calloc(s/8, 8);
@@ -52,12 +53,12 @@ PRIVATE void* cutZalloc(size_t s)
     }
 }
 
-PRIVATE void* cutRealloc(void* p, size_t s)
+PRIVATE void* cutRealloc(void* state, void* p, size_t s)
 {
     return realloc(p, s);
 }
 
-PRIVATE void cutDealloc(void* p)
+PRIVATE void cutDealloc(void* state, void* p)
 {
     if (p) { free(p); }
 }
@@ -77,16 +78,18 @@ PRIVATE const cutAllocator DEFAULT_ALLOC = {
 PRIVATE cutAllocator  SET_ALLOC;
 PRIVATE cutAllocator* ALLOC_PTR = NULL;
 
-cutAllocator cutDefaultAllocator()
+const cutAllocator* cutDefaultAllocator()
 {
-    if (ALLOC_PTR == NULL) {
-        SET_ALLOC = DEFAULT_ALLOC;
+    if (CUT_UNLIKELY(ALLOC_PTR == NULL)) {
         ALLOC_PTR = &SET_ALLOC;
+        SET_ALLOC = DEFAULT_ALLOC;
     }
-    return SET_ALLOC;
+    return ALLOC_PTR;
 }
 
-void cutSetDefaultAllocator(cutAllocator alloc)
+void cutSetDefaultAllocator(const cutAllocator* alloc)
 {
-    SET_ALLOC = alloc;
+    if (CUT_LIKELY(alloc)) {
+        SET_ALLOC = *alloc;
+    }
 }
