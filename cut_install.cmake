@@ -1,8 +1,8 @@
 # executable : install
 # -- Version
-set(install_maj_ver 0)
-set(install_min_ver 0)
-set(install_pat_ver 1)
+set(install_maj_ver ${cut_maj_ver})
+set(install_min_ver ${cut_min_ver})
+set(install_pat_ver ${cut_pat_ver})
 
 set(install_lib_ver
     "${install_maj_ver}.${install_min_ver}.${install_pat_ver}")

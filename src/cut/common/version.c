@@ -12,22 +12,22 @@
 #define tokencat(x,y,z) \
   stringify(x) "." stringify(y) "." stringify(z)
 
-int cutCommonMajorVersion()
+int cutMajorVersion()
 {
-    return CUT_COMMON_MAJ;
+    return CUT_MAJ;
 }
 
-int cutCommonMinorVersion()
+int cutMinorVersion()
 {
-    return CUT_COMMON_MIN;
+    return CUT_MIN;
 }
 
-int cutCommonPatchVersion()
+int cutPatchVersion()
 {
-    return CUT_COMMON_PAT;
+    return CUT_PAT;
 }
 
-const char* cutCommonVersionString()
+const char* cutVersionString()
 {
-    return tokencat(CUT_COMMON_MAJ, CUT_COMMON_MIN, CUT_COMMON_PAT);
+    return tokencat(CUT_MAJ, CUT_MIN, CUT_PAT);
 }

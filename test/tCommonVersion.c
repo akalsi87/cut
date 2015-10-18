@@ -14,10 +14,10 @@
 
 TEST_FUNC( version )
 {
-    TEST_TRUE( cutCommonMajorVersion() == 0 );
-    TEST_TRUE( cutCommonMinorVersion() == 0 );
-    TEST_TRUE( cutCommonPatchVersion() == 1 );
-    TEST_TRUE( strcmp(cutCommonVersionString(), "0.0.1") == 0 );
+    TEST_TRUE( cutMajorVersion() == 0 );
+    TEST_TRUE( cutMinorVersion() == 0 );
+    TEST_TRUE( cutPatchVersion() == 1 );
+    TEST_TRUE( strcmp(cutVersionString(), "0.0.1") == 0 );
 }
 
 void SetupTests(void)

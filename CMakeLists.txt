@@ -23,7 +23,7 @@ set(PROJ_USE_LTO FALSE)
 include("cmake/ProjTools.cmake")
 
 # -- Targets for the project
-include("cut_common.cmake")
+include("cut.cmake")
 include("cut_installer.cmake")
 include("cut_install.cmake")
 

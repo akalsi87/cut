@@ -63,13 +63,13 @@ typedef struct cutAllocTag
     void*          _state;   /*!< Internal state of the allocator     */
 } cutAllocator;
 
-CUT_COMMON_API
+CUT_API
 /*!
  * Get the deafult allocator. This is the allocator used by this library.
  */
 const cutAllocator* cutDefaultAllocator();
 
-CUT_COMMON_API
+CUT_API
 /*!
  * Set the default allocator used by this library. This must be called before
  * any other APIs as the library state may have allocated data from a different

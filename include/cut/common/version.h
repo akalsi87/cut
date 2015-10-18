@@ -9,28 +9,28 @@
 /* MOD includes */
 #include <cut/common/exportsym.h>
 
-CUT_COMMON_API
+CUT_API
 /*!
  * \return Major library version.
  */
-int cutCommonMajorVersion();
+int cutMajorVersion();
 
-CUT_COMMON_API
+CUT_API
 /*!
  * \return Minor library version.
  */
-int cutCommonMinorVersion();
+int cutMinorVersion();
 
-CUT_COMMON_API
+CUT_API
 /*!
  * \return Patch library version.
  */
-int cutCommonPatchVersion();
+int cutPatchVersion();
 
-CUT_COMMON_API
+CUT_API
 /*!
  * \return Full version string.
  */
-const char* cutCommonVersionString();
+const char* cutVersionString();
 
 #endif/*CUT_COMMON_VERSION_H*/
