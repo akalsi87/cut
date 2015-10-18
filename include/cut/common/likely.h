@@ -33,10 +33,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CUT_COMMON_LIKELY_H
 
 #if defined(_MSC_VER)
+/*! Macro to use for likely conditions */
 #  define CUT_LIKELY(x)   (x)
+/*! Macro to use for unlikely conditions */
 #  define CUT_UNLIKELY(x) (x)
 #else/*non-MSVC compiler*/
+/*! Macro to use for likely conditions */
 #  define CUT_LIKELY(x)   __builtin_expect((x),1)
+/*! Macro to use for unlikely conditions */
 #  define CUT_UNLIKELY(x) __builtin_expect((x),0)
 #endif/*defined(_MSC_VER)*/
 

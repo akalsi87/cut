@@ -33,8 +33,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CUT_COMMON_INLINE_H
 
 #if defined(_MSC_VER)
+/*! Macro to use for inline entries */
 #  define CUT_INLINE __forceinline
 #else/*non-MSVC compiler*/
+/*! Macro to use for inline entries */
 #  define CUT_INLINE __inline__ __attribute__((always_inline))
 #endif/*defined(_MSC_VER)*/
 

@@ -11,25 +11,25 @@
 
 CUT_COMMON_API
 /*!
- *
+ * \return Major library version.
  */
 int cutCommonMajorVersion();
 
 CUT_COMMON_API
 /*!
- *
+ * \return Minor library version.
  */
 int cutCommonMinorVersion();
 
 CUT_COMMON_API
 /*!
- *
+ * \return Patch library version.
  */
 int cutCommonPatchVersion();
 
 CUT_COMMON_API
 /*!
- *
+ * \return Full version string.
  */
 const char* cutCommonVersionString();
 

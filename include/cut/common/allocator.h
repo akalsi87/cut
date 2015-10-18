@@ -56,11 +56,11 @@ typedef void* (*cutZallocFcn)(void*, size_t);
  */
 typedef struct cutAllocTag
 {
-    cutAllocFcn    alloc;
-    cutDeallocFcn  dealloc;
-    cutReallocFcn  realloc;
-    cutZallocFcn   zalloc;
-    void*          _state;
+    cutAllocFcn    alloc;    /*!< Allocate function callback          */
+    cutDeallocFcn  dealloc;  /*!< Deallocate function callback        */
+    cutReallocFcn  realloc;  /*!< Reallocate function callback        */
+    cutZallocFcn   zalloc;   /*!< Zeroed allocation function callback */
+    void*          _state;   /*!< Internal state of the allocator     */
 } cutAllocator;
 
 CUT_COMMON_API
