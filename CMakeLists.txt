@@ -16,8 +16,8 @@ set(INCLUDE_TEST_IN_BIN FALSE)
 
 # -- Set project name
 project(cut)
-# use link time optimization
-set(PROJ_USE_LTO TRUE)
+# set link time optimization option
+set(PROJ_USE_LTO FALSE)
 
 # -- Include the magic ProjTools
 include("cmake/ProjTools.cmake")
