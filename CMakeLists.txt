@@ -16,9 +16,14 @@ set(INCLUDE_TEST_IN_BIN FALSE)
 
 # -- Set project name
 project(cut)
+# use link time optimization
+set(PROJ_USE_LTO TRUE)
 
 # -- Include the magic ProjTools
 include("cmake/ProjTools.cmake")
+
+# -- Targets for the project
+include("cut_common.cmake")
 
 # -- Add the subdirectories
 set(PROJ_SUBDIRS  unittest; doc; tools; test)
