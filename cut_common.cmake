@@ -37,7 +37,7 @@ set_tgt_ver(cut_common ${cut_common_lib_ver} ${cut_common_lib_compat_ver})
 
 # --- static
 add_lib(cut_common_s STATIC ${cut_common_src} ${cut_common_int_hdr} ${cut_common_exp_hdr})
-add_lib_build_def(cut_common_s include/cut/cut_common/exportsym.h CUT_COMMON)
+add_lib_build_def(cut_common_s include/cut/common/exportsym.h CUT_COMMON)
 add_comp_def(cut_common_s CUT_COMMON_MAJ=${cut_common_maj_ver})
 add_comp_def(cut_common_s CUT_COMMON_MIN=${cut_common_min_ver})
 add_comp_def(cut_common_s CUT_COMMON_PAT=${cut_common_pat_ver})
