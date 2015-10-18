@@ -531,11 +531,12 @@ function(add_test_exe testname filename)
   # deal with test on install
   # copy file to temp folder
   set(test_dirname "${testname}.toi")
-  projmsg("Adding install test for ${testname} in dir ${test_dirname}")
   
   # copy the file over
   file(MAKE_DIRECTORY ${test_dirname})
-  file(COPY ${filename} DESTINATION ${test_dirname})
+  get_filename_component(tfilename ${filename} NAME)
+  get_filename_component(filepath ${filename} ABSOLUTE)
+  configure_file(${filepath} "${test_dirname}/${tfilename}" COPYONLY)
 
   set(install_test_args ${ARGV})
   list(REMOVE_AT install_test_args 0)

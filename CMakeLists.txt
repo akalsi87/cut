@@ -20,6 +20,9 @@ project(cut)
 # -- Include the magic ProjTools
 include("cmake/ProjTools.cmake")
 
+# -- Targets for the project
+include("cut_common.cmake")
+
 # -- Add the subdirectories
 set(PROJ_SUBDIRS  unittest; doc; tools; test)
 
